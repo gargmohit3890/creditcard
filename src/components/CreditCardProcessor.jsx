@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import AddNewCard from "./addNew/AddNewCard";
+import AddNewCard from "./add/AddNewCard";
 import ViewAllCards from "./view/ViewAllCards";
 import PageTitle from "./title/Title";
 import Error from "./error/Error";

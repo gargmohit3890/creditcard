@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {createStructuredSelector} from "reselect";
 import {getAllCards} from "../../../selector";
 import {connect} from "react-redux";
+import {setExistingCards} from "../../../store/viewCards";
 
 const StyledTable = withStyles(() => ({
   root: {
@@ -35,33 +36,49 @@ const StyledHeader = withStyles(() => ({
   },
 }))(TableCell);
 
-const ViewTable = ({ cards }) => (
-  <TableContainer component={Paper}>
-    <StyledTable>
-      <TableHead>
-        <TableRow>
-          <StyledHeader>Name</StyledHeader>
-          <StyledHeader>Card Number</StyledHeader>
-          <StyledHeader>Balance</StyledHeader>
-          <StyledHeader>Limit</StyledHeader>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {cards.map((card) => (
-          <TableRow key={card.cardNumber}>
-            <StyledCell>{card.name}</StyledCell>
-            <StyledCell>{card.cardNumber}</StyledCell>
-            <StyledCell>{card.balance}</StyledCell>
-            <StyledCell>{card.limit}</StyledCell>
+const ViewTable = ({ cards, setExistingCards }) => {
+  useEffect(() => {
+    // TODO: get service api call here
+    // set this in then clause
+    console.log('execute on load');
+    setExistingCards([
+      { name: 'test data 1', cardNumber: '3565', balance: 1000, limit: 5000 },
+      { name: 'test data 2', cardNumber: '65456', balance: 10000, limit: 35000 },
+    ]);
+  }, [setExistingCards]);
+
+  return (
+    <TableContainer component={Paper}>
+      <StyledTable>
+        <TableHead>
+          <TableRow>
+            <StyledHeader>Name</StyledHeader>
+            <StyledHeader>Card Number</StyledHeader>
+            <StyledHeader>Balance</StyledHeader>
+            <StyledHeader>Limit</StyledHeader>
           </TableRow>
-        ))}
-      </TableBody>
-    </StyledTable>
-  </TableContainer>
-);
+        </TableHead>
+        <TableBody>
+          {cards.map((card) => (
+            <TableRow key={card.cardNumber}>
+              <StyledCell>{card.name}</StyledCell>
+              <StyledCell>{card.cardNumber}</StyledCell>
+              <StyledCell>{card.balance}</StyledCell>
+              <StyledCell>{card.limit}</StyledCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </StyledTable>
+    </TableContainer>
+  );
+}
 
 const mapStateToProps = createStructuredSelector({
   cards: getAllCards,
 });
 
-export default connect(mapStateToProps)(ViewTable);
+const mapDispatchToProps = {
+  setExistingCards
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTable);

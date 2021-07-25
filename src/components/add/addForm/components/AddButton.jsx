@@ -20,29 +20,26 @@ const useStyles = makeStyles(() => ({
 
 const AddButton = ({ newCard, addToExistingCards, resetForm, setErrors, resetErrors }) => {
   const classes = useStyles();
+
+  const addCard = () => {
+    // TODO: add service call
+    // add fetch call here
+    // move below lines to then clause
+    addToExistingCards(newCard);
+    resetForm();
+    resetErrors();
+    // move below lines to catch clause
+    setErrors([
+      { "field": "name", "errorMessage": "must not be blank"},
+      { "field": "card number", "errorMessage": "must be a valid card"}
+    ]);
+  };
+
   return (
     <Grid className={classes.fieldContainer}>
       <Button
         id="add-button"
-        onClick={() => {
-          // TODO: add service call
-          // add fetch call here
-          // move below lines to then clause
-          addToExistingCards(newCard);
-          resetForm();
-          resetErrors();
-          // move below lines to catch clause
-          setErrors([
-            {
-              "field": "name",
-              "errorMessage": "must not be blank"
-            },
-            {
-              "field": "card number",
-              "errorMessage": "must be a valid card"
-            }
-          ])
-        }}
+        onClick={addCard}
         variant="contained"
         color="primary"
         className={classes.field}>

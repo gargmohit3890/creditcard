@@ -1,6 +1,7 @@
 import React from "react";
-import {Grid, Typography} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import ViewTable from "./table/ViewTable";
+import ViewTitle from "./ViewTitle";
 
 const ViewAllCards = () => (
   <Grid
@@ -8,9 +9,7 @@ const ViewAllCards = () => (
     item
     spacing={2}
     direction="row">
-    <Typography variant="h5">
-      Existing Cards
-    </Typography>
+    <ViewTitle />
     <ViewTable />
   </Grid>
 );

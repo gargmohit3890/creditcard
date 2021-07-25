@@ -12,7 +12,7 @@ const Error = ({ shown, messages }) => (
     autoHideDuration={6000}>
     <Alert severity="error" elevation={6} variant="filled">
       {messages.map(({ field, errorMessage }) =>
-        <div><b>{field}: </b>{errorMessage}</div>
+        <div key={field}><b>{field}: </b>{errorMessage}</div>
       )}
     </Alert>
   </Snackbar>
